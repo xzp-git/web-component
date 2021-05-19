@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>collapse</title>
+</head>
+<body>
+    <x-collapse>
+        <x-collapse-item title="Node" name="1">
+            <div>nodejs welcome</div>
+        </x-collapse-item>
+        <x-collapse-item title="react" name="2">
+            <div>react welcome</div>
+        </x-collapse-item>
+        <x-collapse-item title="vue" name="3">
+            <div>vue welcome</div>
+        </x-collapse-item>
+    </x-collapse>
+
+    <template id="collapse_tmpl">
+        <div class="x-collapse">
+            <slot></slot>
+        </div>
+    </template>
+    <template id="collapse_item_tmpl">
+        <div class="x-collapse-item">
+            <div class="title"></div>
+            <div class="content">
+                <slot></slot>
+            </div>
+        </div>
+    </template>
+    <script src="./index.js" type="module"></script>
+</body>
+</html>

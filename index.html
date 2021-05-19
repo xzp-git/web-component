@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebComponent</title>
+</head>
+<body>
+    <x-button type="primary">X按钮</x-button>
+    <x-button >X按钮</x-button>
+    <template id="btn">
+        <button class="x-button">
+            <slot>默认按钮</slot>
+        </button>
+    </template>
+
+    <script>
+        class Xbutton extends HTMLElement{
+            constructor(){
+                super()
+                let shadow = this.attachShadow({mode: 'open'});
+                let btnTmpl =  document.getElementById('btn')
+                let cloneTemplate = btnTmpl.content.cloneNode(true)
+
+                const style = document.createElement('style')
+                let type = this.getAttribute('type') || 'default'
+
+                const btnlist = {
+                    'primary' :{
+                        background:'#409eff',
+                        color:'#fff'
+                    },
+                    'default':{
+                        background:'#909399',
+                        color:'#fff'
+                    }
+                }
+                style.textContent = `
+                    .x-button{
+                        outline:none;
+                        border:none;
+                        border-radius:4px;
+                        padding:5px 20px;
+                        display: inline-flex;
+                        background:${btnlist[type].background };
+                        color:${btnlist[type].color };
+                        cursor:pointer
+                    }
+                `
+                
+                // dom操作具备移动性
+                shadow.appendChild(cloneTemplate)
+                shadow.appendChild(style)
+            } 
+        }
+        // 定义了一个自定义的标签 组件
+        window.customElements.define('x-button', Xbutton)
+    </script>
+</body>
+</html>
